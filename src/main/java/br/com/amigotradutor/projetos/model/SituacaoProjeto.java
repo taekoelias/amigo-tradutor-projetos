@@ -27,7 +27,8 @@ public class SituacaoProjeto {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataCadastro;
 	
-	private long idUsuario;
+	@ManyToOne
+	private Usuario usuario;
 	
 	public SituacaoProjeto() {
 	}
@@ -38,7 +39,7 @@ public class SituacaoProjeto {
 		this.projeto = projeto;
 		this.tipo = new TipoSituacaoProjeto(tipo, null);
 		this.dataCadastro = dataCadastro;
-		this.idUsuario = usuario;
+		this.usuario = new Usuario(usuario);
 	}
 
 	public long getId() {
@@ -73,12 +74,12 @@ public class SituacaoProjeto {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public long getIdUsuario() {
-		return idUsuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setIdUsuario(long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 }

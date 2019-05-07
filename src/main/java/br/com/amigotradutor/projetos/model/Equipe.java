@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Equipe {
@@ -15,7 +16,7 @@ public class Equipe {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@ManyToOne
+	@OneToMany(mappedBy="equipe")
 	private List<MembroEquipe> membros;
 	
 	public Equipe() {

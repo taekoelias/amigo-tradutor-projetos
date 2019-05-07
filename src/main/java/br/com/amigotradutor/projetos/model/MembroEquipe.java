@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -13,8 +15,11 @@ public class MembroEquipe {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@OneToMany
+	@ManyToOne
 	private Equipe equipe;
+	
+	@ManyToOne
+	private UsuarioPapel usuarioPapel;
 	
 	private boolean responsavel;
 
@@ -40,6 +45,14 @@ public class MembroEquipe {
 
 	public void setResponsavel(boolean responsavel) {
 		this.responsavel = responsavel;
+	}
+
+	public UsuarioPapel getUsuarioPapel() {
+		return usuarioPapel;
+	}
+
+	public void setUsuarioPapel(UsuarioPapel usuarioPapel) {
+		this.usuarioPapel = usuarioPapel;
 	}
 	
 }
