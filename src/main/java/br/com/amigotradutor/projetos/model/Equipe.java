@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Equipe {
@@ -15,6 +16,9 @@ public class Equipe {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
+	
+	@OneToOne
+	private Projeto projeto;
 	
 	@OneToMany(mappedBy="equipe")
 	private List<MembroEquipe> membros;
@@ -36,6 +40,14 @@ public class Equipe {
 
 	public void setMembros(List<MembroEquipe> membros) {
 		this.membros = membros;
+	}
+
+	public Projeto getProjeto() {
+		return projeto;
+	}
+
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
 	}
 	
 }

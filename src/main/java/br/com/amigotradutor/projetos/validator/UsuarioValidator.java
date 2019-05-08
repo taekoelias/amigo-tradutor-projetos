@@ -5,6 +5,7 @@ import java.util.List;
 import br.com.amigotradutor.common.exception.EntidadeNaoExistenteException;
 import br.com.amigotradutor.common.exception.EntidadeUnicaExistenteException;
 import br.com.amigotradutor.common.exception.ValidacaoNegocioException;
+import br.com.amigotradutor.common.util.ValidatorUtil;
 import br.com.amigotradutor.common.validator.BaseValidator;
 import br.com.amigotradutor.projetos.model.Usuario;
 import br.com.amigotradutor.projetos.repository.UsuarioRepository;
@@ -20,7 +21,10 @@ public class UsuarioValidator implements BaseValidator<Usuario, Long>{
 	@Override
 	public void requiredField(Usuario obj) throws ValidacaoNegocioException {
 		
-		if (obj == null || obj.getNome() == null || obj.getEmail() == null || obj.getSenha() == null || obj.getApelido() == null || obj.getDataNascimento() == null)
+		if (ValidatorUtil.isEmpty(obj) || ValidatorUtil.isEmpty(obj.getNome()) 
+				|| ValidatorUtil.isEmpty(obj.getNome().getPrimeiroNome()) || ValidatorUtil.isEmpty(obj.getNome().getUltimoNome()) 
+				|| ValidatorUtil.isEmpty(obj.getEmail()) || ValidatorUtil.isEmpty(obj.getSenha()) 
+				|| ValidatorUtil.isEmpty(obj.getApelido()) || ValidatorUtil.isEmpty(obj.getDataNascimento()))
 			throw new ValidacaoNegocioException("Os dados obrigatórios do usuário não foram preenchidos.");
 		
 	}

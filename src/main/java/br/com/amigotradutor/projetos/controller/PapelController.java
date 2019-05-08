@@ -3,6 +3,7 @@ package br.com.amigotradutor.projetos.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,14 +15,18 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.amigotradutor.common.exception.ValidacaoNegocioException;
 import br.com.amigotradutor.projetos.model.Papel;
 import br.com.amigotradutor.projetos.service.PapelService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
+@Api(value = "Papel")
 public class PapelController {
 
 	@Autowired
 	private PapelService service;
 	
-	@GetMapping("/papeis")
+	@ApiOperation("Recupera os papeis possíveis de atribuição a usuários.")
+	@GetMapping(value = "/papeis", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public List<Papel> getAllPapel(){
 		return service.getAll();
 	}

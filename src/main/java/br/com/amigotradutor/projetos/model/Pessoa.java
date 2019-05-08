@@ -3,6 +3,7 @@ package br.com.amigotradutor.projetos.model;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,10 +21,8 @@ public abstract class Pessoa {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Column(nullable=false)
-	private String nome;
-	
-	private String apelido;
+	@Embedded
+	private NomePessoa nome;
 	
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
@@ -31,11 +30,10 @@ public abstract class Pessoa {
 	public Pessoa() {
 	}
 
-	public Pessoa(long id, String nome, String apelido, Date dataNascimento) {
+	public Pessoa(long id, NomePessoa nome, Date dataNascimento) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.apelido = apelido;
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -43,12 +41,8 @@ public abstract class Pessoa {
 		return id;
 	}
 	
-	public String getNome() {
+	public NomePessoa getNome() {
 		return nome;
-	}
-	
-	public String getApelido() {
-		return apelido;
 	}
 	
 	public Date getDataNascimento() {
@@ -59,12 +53,8 @@ public abstract class Pessoa {
 		this.id = id;
 	}
 	
-	public void setNome(String nome) {
+	public void setNome(NomePessoa nome) {
 		this.nome = nome;
-	}
-	
-	public void setApelido(String apelido) {
-		this.apelido = apelido;
 	}
 	
 	public void setDataNascimento(Date dataNascimento) {
@@ -73,6 +63,6 @@ public abstract class Pessoa {
 	
 	@Override
 	public String toString() {
-		return this.nome + " ("+apelido+")";
+		return this.nome.toString();
 	}
 }

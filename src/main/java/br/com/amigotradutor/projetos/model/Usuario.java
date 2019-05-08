@@ -15,6 +15,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 public class Usuario extends Pessoa {
 
+	private String apelido;
+	
 	@Column(unique=true,nullable=false)
 	private String email;
 	
@@ -33,11 +35,12 @@ public class Usuario extends Pessoa {
 	}
 	
 	public Usuario(long id) {
-		super(id, null, null, null);
+		super(id, null, null);
 	}
 	
-	public Usuario(long id, String nome, String nick, Date dataNascimento, String email, String senha, boolean admin) {
-		super(id, nome, nick, dataNascimento);
+	public Usuario(long id, NomePessoa nome, String apelido, Date dataNascimento, String email, String senha, boolean admin) {
+		super(id, nome, dataNascimento);
+		this.apelido = apelido;
 		this.email = email;
 		this.senha = senha;
 		this.admin = admin;
@@ -65,6 +68,14 @@ public class Usuario extends Pessoa {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	public String getApelido() {
+		return apelido;
+	}
+
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
 	}
 
 	public List<Papel> getPapeis() {

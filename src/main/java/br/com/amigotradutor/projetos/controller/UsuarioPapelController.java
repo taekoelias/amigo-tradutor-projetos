@@ -29,32 +29,20 @@ public class UsuarioPapelController {
 	}
 	
 	@PostMapping("/usuarios/{id}/papeis")
-	public UsuarioPapel addUsuarioPapel(@PathVariable long id, @RequestBody Papel p) throws ValidacaoNegocioException{
+	public UsuarioPapel addUsuarioPapel(@PathVariable long id, @RequestBody UsuarioPapel up) throws ValidacaoNegocioException{
 		
-		UsuarioPapel up = new UsuarioPapel(id, p.getId());
+		up.getUsuarioPapelId().setUsuarioId(id);
 		usuarioPapelService.add(up);
 		
 		return up;
 	}
 	
-	@PutMapping("/usuarios/{id}/papeis/{idPapel}/ativa")
-	public UsuarioPapel ativaPapeisUsuario(@PathVariable long id, @PathVariable long idPapel) throws ValidacaoNegocioException{
+	@PutMapping("/usuarios/{id}/papeis/{idPapel}")
+	public UsuarioPapel ativaPapeisUsuario(@PathVariable long id, @PathVariable long idPapel, @RequestBody UsuarioPapel up) throws ValidacaoNegocioException{
 		
-		UsuarioPapel up = new UsuarioPapel(id, idPapel);
-		up.setAtivo(true);
-		
-		usuarioPapelService.update(new UsuarioPapelId(id, idPapel),up);
-		
-		return up;
-	}
-	
-	@PutMapping("/usuarios/{id}/papeis/{idPapel}/desativa")
-	public UsuarioPapel desativaPapeisUsuario(@PathVariable long id, @PathVariable long idPapel) throws ValidacaoNegocioException{
-		
-		UsuarioPapel up = new UsuarioPapel(id, idPapel);
-		up.setAtivo(false);
-		
-		usuarioPapelService.update(new UsuarioPapelId(id, idPapel),up);
+		up.getUsuarioPapelId().setUsuarioId(id);
+		up.getUsuarioPapelId().setPapelId(idPapel);
+		usuarioPapelService.update(up.getUsuarioPapelId(),up);
 		
 		return up;
 	}
